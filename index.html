@@ -1,0 +1,58 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Stock - Alquiber Renting Flexible</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Alquiber Renting Flexible</h1>
+        <h2>Gestión de Stock del Taller</h2>
+        <table>
+            <tr>
+                <th>Material</th>
+                <th>Cantidad</th>
+                <th>Acción</th>
+            </tr>
+            <tr>
+                <td><a href="filtros.html">Filtros</a></td>
+                <td id="stock-filtros">10</td>
+                <td>
+                    <button onclick="reducirStock('stock-filtros')">Usar</button>
+                    <button onclick="añadirStock('stock-filtros')">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Guantes</td>
+                <td id="stock-guantes">20</td>
+                <td>
+                    <button onclick="reducirStock('stock-guantes')">Usar</button>
+                    <button onclick="añadirStock('stock-guantes')">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Escobillas</td>
+                <td id="stock-escobillas">15</td>
+                <td>
+                    <button onclick="reducirStock('stock-escobillas')">Usar</button>
+                    <button onclick="añadirStock('stock-escobillas')">Añadir</button>
+                </td>
+            </tr>
+        </table>
+        <div class="note-section">
+            <h3>Notas</h3>
+            <textarea id="nota" placeholder="Escribe aquí tus notas o comentarios..." rows="5" cols="50"></textarea>
+            <button onclick="guardarNota()">Guardar Nota</button>
+        </div>
+        <div class="saved-notes">
+            <h3>Notas Guardadas</h3>
+            <div id="notes-list"></div> <!-- Aquí se mostrarán las notas -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
