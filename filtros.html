@@ -3,57 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Filtros2</title>
+    <title>Filtros</title>
     <link rel="stylesheet" href="styles.css">
     <script defer src="script.js"></script> <!-- Enlazamos el script -->
 </head>
 <body>
     <div class="container">
-        <h1>Marcas de Filtros</h1>
-        <ul>
-            <li onclick="toggleLista('vw')">VOLKSWAGEN</li>
-            <ul id="vw" class="hidden">
-                <li><a href="tabla_codigos.html?marca=vw&filtro=aceite">Filtro de aceite</a></li>
-                <li><a href="tabla_codigos.html?marca=vw&filtro=aire">Filtro de aire</a></li>
-                <li><a href="tabla_codigos.html?marca=vw&filtro=combustible">Filtro de combustible</a></li>
-            </ul>
-
-            <li onclick="toggleLista('citroen')">CITROËN</li>
-            <ul id="citroen" class="hidden">
-                <li><a href="tabla_codigos.html?marca=citroen&filtro=aceite">Filtro de aceite</a></li>
-                <li><a href="tabla_codigos.html?marca=citroen&filtro=aire">Filtro de aire</a></li>
-                <li><a href="tabla_codigos.html?marca=citroen&filtro=habitaculo">Filtro de habitáculo</a></li>
-            </ul>
-
-            <li onclick="toggleLista('opel')">OPEL</li>
-            <ul id="opel" class="hidden">
-                <li><a href="tabla_codigos.html?marca=opel&filtro=aceite">Filtro de aceite</a></li>
-                <li><a href="tabla_codigos.html?marca=opel&filtro=aire">Filtro de aire</a></li>
-                <li><a href="tabla_codigos.html?marca=opel&filtro=combustible">Filtro de combustible</a></li>
-            </ul>
-
-            <li onclick="toggleLista('renault')">RENAULT</li>
-            <ul id="renault" class="hidden">
-                <li><a href="tabla_codigos.html?marca=renault&filtro=aceite">Filtro de aceite</a></li>
-                <li><a href="tabla_codigos.html?marca=renault&filtro=habitaculo">Filtro de habitáculo</a></li>
-                <li><a href="tabla_codigos.html?marca=renault&filtro=combustible">Filtro de combustible</a></li>
-            </ul>
-
-            <li onclick="toggleLista('toyota')">TOYOTA</li>
-            <ul id="toyota" class="hidden">
-                <li><a href="tabla_codigos.html?marca=toyota&filtro=aire">Filtro de aire</a></li>
-                <li><a href="tabla_codigos.html?marca=toyota&filtro=combustible">Filtro de combustible</a></li>
-                <li><a href="tabla_codigos.html?marca=toyota&filtro=habitaculo">Filtro de habitáculo</a></li>
-            </ul>
-
-            <li onclick="toggleLista('lexus')">LEXUS</li>
-            <ul id="lexus" class="hidden">
-                <li><a href="tabla_codigos.html?marca=lexus&filtro=aceite">Filtro de aceite</a></li>
-                <li><a href="tabla_codigos.html?marca=lexus&filtro=aire">Filtro de aire</a></li>
-                <li><a href="tabla_codigos.html?marca=lexus&filtro=combustible">Filtro de combustible</a></li>
-            </ul>
+    <h1 data-i18n="marcas_titulo">Filtros</h1>
+        <div class="filters-controls" style="text-align:center; margin-bottom:12px;">
+            <input id="brand-search" type="search" placeholder="Buscar marca o modelo..." style="width:70%; padding:8px;" />
+        </div>
+        <ul id="brands-root">
+            <!-- Brands and models will be injected here by script.js -->
         </ul>
-        <a href="index.html"><button>Volver</button></a>
+            <!-- New chart: filtros por referencia -->
+            <div class="stats-card" style="margin-top:18px; text-align:left;">
+                <h3 data-i18n="filtros_por_referencia">Filtros</h3>
+                <div style="display:flex; gap:12px; align-items:center; justify-content:center; margin-bottom:8px;">
+                    <label for="filtros-ref-select" data-i18n="label_filter_ref">Tipo:</label>
+                    <select id="filtros-ref-select">
+                        <option value="todos" data-i18n="option_todos">Todos</option>
+                        <option value="aceite" data-i18n="option_aceite">Aceite</option>
+                        <option value="aire" data-i18n="option_aire">Aire</option>
+                        <option value="habitaculo" data-i18n="option_habitaculo">Habitáculo</option>
+                    </select>
+                    <span id="total-filtros-ref" style="margin-left:12px;font-weight:bold;"></span>
+                </div>
+                <div style="display:flex; gap:12px; align-items:flex-start; justify-content:center;">
+                    <canvas id="filtros-ref-chart" width="260" height="260"></canvas>
+                    <div id="filtros-ref-legend" style="max-width:320px; text-align:left;"></div>
+                </div>
+            </div>
+    <div style="text-align:center; margin-top:16px;">
+        <a href="index.html"><button data-i18n="btn_volver">Volver</button></a>
+    </div>
     </div>
 </body>
 </html>
