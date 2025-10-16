@@ -9,47 +9,318 @@
 </head>
 <body>
     <div class="container">
-        <h1>Alquiber Renting Flexible</h1>
-        <h2>Gestión de Stock del Taller</h2>
-        <table>
+        <header class="topbar">
+            <div class="brand">
+                <h1 data-i18n="site_title">Alquiber Renting Flexible</h1>
+                <h2 data-i18n="subtitle">Gestión de Stock del Taller</h2>
+            </div>
+            <div class="controls">
+                <div style="display:flex; gap:8px; align-items:center;">
+                    <select id="lang-select" class="lang-select" onchange="changeLanguage(this.value)">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="it">Italiano</option>
+                    </select>
+                    <select id="role-select" class="lang-select" onchange="changeRole(this.value)">
+                        <option value="user" data-i18n="role_user">Usuario</option>
+                        <option value="admin" data-i18n="role_admin">Administrador</option>
+                    </select>
+                </div>
+                <div style="margin-left:12px;">
+                    <button onclick="openLoginModal()" id="login-btn" data-i18n="btn_login">Login</button>
+                    <span id="current-user" style="color:white; margin-left:8px;"></span>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-grid">
+            <section class="left-col">
+                <table>
             <tr>
-                <th>Material</th>
-                <th>Cantidad</th>
-                <th>Acción</th>
+                <th data-i18n="th_material">Material</th>
+                <th data-i18n="th_cantidad">Cantidad</th>
+                <th data-i18n="th_accion">Acción</th>
             </tr>
             <tr>
-                <td><a href="filtros.html">Filtros</a></td>
+                <td><a href="filtros.html" data-i18n="link_filtros">Filtros</a></td>
                 <td id="stock-filtros">10</td>
                 <td>
-                    <button onclick="reducirStock('stock-filtros')">Usar</button>
-                    <button onclick="añadirStock('stock-filtros')">Añadir</button>
+                    <button onclick="openFiltroForm()" data-i18n="btn_usar">Usar</button>
+                    <button onclick="openAddFilterForm()" data-i18n="btn_añadir">Añadir</button>
                 </td>
             </tr>
             <tr>
-                <td>Guantes</td>
-                <td id="stock-guantes">20</td>
+                <td data-i18n="item_guantes">Guantes</td>
+                <td id="stock-guantes">0</td>
                 <td>
-                    <button onclick="reducirStock('stock-guantes')">Usar</button>
-                    <button onclick="añadirStock('stock-guantes')">Añadir</button>
+                    <button onclick="reducirStock('stock-guantes')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-guantes')" data-i18n="btn_añadir">Añadir</button>
                 </td>
             </tr>
             <tr>
-                <td>Escobillas</td>
-                <td id="stock-escobillas">15</td>
+                <td data-i18n="item_escobillas">Escobillas</td>
+                <td id="stock-escobillas">0</td>
                 <td>
-                    <button onclick="reducirStock('stock-escobillas')">Usar</button>
-                    <button onclick="añadirStock('stock-escobillas')">Añadir</button>
+                    <button onclick="reducirStock('stock-escobillas')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-escobillas')" data-i18n="btn_añadir">Añadir</button>
                 </td>
             </tr>
-        </table>
-        <div class="note-section">
-            <h3>Notas</h3>
+            <tr>
+                <td data-i18n="material_baterias">Baterías</td>
+                <td id="stock-baterias">1</td>
+                <td>
+                    <button onclick="reducirStock('stock-baterias')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-baterias')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_antigelo">Anticongelante</td>
+                <td id="stock-antigelo">2L</td>
+                <td>
+                    <button onclick="reducirStock('stock-antigelo')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-antigelo')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_desgrasante">Desgrasante</td>
+                <td id="stock-desgrasante">3L</td>
+                <td>
+                    <button onclick="reducirStock('stock-desgrasante')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-desgrasante')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_cerraduras">Cerraduras</td>
+                <td id="stock-cerraduras">5 (8092332415)</td>
+                <td>
+                    <button onclick="reducirStock('stock-cerraduras')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-cerraduras')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_portavacas">Portavacas</td>
+                <td id="stock-portavacas">5</td>
+                <td>
+                    <button onclick="reducirStock('stock-portavacas')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-portavacas')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_porta_escaleras">Porta Escaleras</td>
+                <td id="stock-portaescaleras">5</td>
+                <td>
+                    <button onclick="reducirStock('stock-portaescaleras')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-portaescaleras')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_panledo">Panledo</td>
+                <td id="stock-panledo">1</td>
+                <td>
+                    <button onclick="reducirStock('stock-panledo')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-panledo')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_scaffali">Scaffali</td>
+                <td id="stock-scaffali">0</td>
+                <td>
+                    <button onclick="reducirStock('stock-scaffali')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-scaffali')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_lamparas">Lámparas (H1,H7)</td>
+                <td id="stock-lamparas">0</td>
+                <td>
+                    <button onclick="reducirStock('stock-lamparas')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-lamparas')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_dot4">DOT-4</td>
+                <td id="stock-dot4">0</td>
+                <td>
+                    <button onclick="reducirStock('stock-dot4')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-dot4')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_limpiacristales">Limpiacristales</td>
+                <td id="stock-limpiacristales">0</td>
+                <td>
+                    <button onclick="reducirStock('stock-limpiacristales')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-limpiacristales')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_limpiacontactos">Limpiacontactos</td>
+                <td id="stock-limpiacontactos">0</td>
+                <td>
+                    <button onclick="reducirStock('stock-limpiacontactos')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-limpiacontactos')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+            <tr>
+                <td data-i18n="material_limpiafrenos">Limpiador de frenos</td>
+                <td id="stock-limpiafrenos">0</td>
+                <td>
+                    <button onclick="reducirStock('stock-limpiafrenos')" data-i18n="btn_usar">Usar</button>
+                    <button onclick="añadirStock('stock-limpiafrenos')" data-i18n="btn_añadir">Añadir</button>
+                </td>
+            </tr>
+                </table>
+                <div class="note-section">
+            <h3 data-i18n="notas_title">Notas</h3>
             <textarea id="nota" placeholder="Escribe aquí tus notas o comentarios..." rows="5" cols="50"></textarea>
-            <button onclick="guardarNota()">Guardar Nota</button>
+            <button onclick="guardarNota()" data-i18n="btn_guardar_nota">Guardar Nota</button>
         </div>
         <div class="saved-notes">
-            <h3>Notas Guardadas</h3>
+            <h3 data-i18n="notas_guardadas">Notas Guardadas</h3>
             <div id="notes-list"></div> <!-- Aquí se mostrarán las notas -->
+        </div>
+        
+        <!-- Modal formulario uso de filtros -->
+        <div id="filtro-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3 data-i18n="modal_title">Registro de Uso de Filtro</h3>
+                <form id="filtro-form">
+                    <label data-i18n="label_tipo">Tipo de filtro:<br>
+                        <input type="text" id="tipo-filtro" required>
+                    </label><br>
+                    <label data-i18n="label_ref">Referencia:<br>
+                        <input type="text" id="referencia" required>
+                    </label><br>
+                    <label data-i18n="label_mat">Matrícula:<br>
+                        <input type="text" id="matricula">
+                    </label><br>
+                    <label data-i18n="label_aceite">Cantidad de aceite (litros):<br>
+                        <input type="number" id="aceite" min="0" step="0.1">
+                    </label><br>
+                    <label data-i18n="label_otras">Otras reparaciones:<br>
+                        <input type="text" id="otras-reparaciones">
+                    </label><br>
+                    <label data-i18n="label_obs">Observaciones:<br>
+                        <textarea id="observaciones" rows="3"></textarea>
+                    </label><br>
+                    <div class="modal-actions">
+                        <button type="button" onclick="submitFiltroForm()" data-i18n="btn_guardar">Guardar</button>
+                        <button type="button" onclick="closeFiltroForm()" data-i18n="btn_cancelar">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Lista de usos de filtros guardados -->
+        <div class="saved-filtros">
+            <h3 data-i18n="usos_filtros">Usos de Filtros</h3>
+            <div id="filtros-list"></div>
+            </section>
+
+            <aside class="right-col">
+                <div class="stats-card">
+                    <h3 data-i18n="totals_title">Totales</h3>
+                    <div><strong data-i18n="label_total_filtros">Total filtros (todos tipos): </strong><span id="total-filtros">0</span></div>
+                    <canvas id="filtros-chart" width="260" height="260" style="background:transparent; border-radius:8px; margin-top:12px;"></canvas>
+                    <div id="filtros-legend" style="color:white; text-align:left; margin-top:8px;"></div>
+                </div>
+
+                <div class="stats-card" style="margin-top:12px;">
+                    <h3 data-i18n="materials_title">Materiales</h3>
+                    <div><strong data-i18n="label_total_materiales">Total materiales: </strong><span id="total-materiales">0</span></div>
+                    <canvas id="materials-chart" width="260" height="260" style="background:transparent; border-radius:8px; margin-top:12px;"></canvas>
+                    <div id="materials-legend" style="color:white; text-align:left; margin-top:8px;"></div>
+                </div>
+
+                <div id="admin-area" class="stats-card" style="margin-top:14px;">
+                    <h3 data-i18n="admin_title">Administración</h3>
+                    <div style="font-size:0.95em; color:#fff; margin-bottom:8px;" data-i18n="admin_protected_desc">(Borrados protegidos)</div>
+                    <button onclick="promptProtectedDelete('inventario_filtros')" data-i18n="btn_del_inventario">Borrar inventario de filtros</button>
+                    <button onclick="promptProtectedDelete('notas')" data-i18n="btn_del_notas">Borrar todas las notas</button>
+                    <button onclick="promptProtectedDelete('usosFiltros')" data-i18n="btn_del_usos">Borrar usos de filtros</button>
+                </div>
+                <div class="stats-card" style="margin-top:8px;" data-admin-only>
+                    <h4 style="margin:6px 0;">Gestión de grupos de materiales</h4>
+                    <button onclick="openMaterialGroupsEditor()">Editar grupos</button>
+                </div>
+
+                <!-- Movements card: admin-only -->
+                <div id="movements-card" class="stats-card" data-admin-only style="margin-top:14px;">
+                    <h3 data-i18n="movements_title">Movimientos</h3>
+                    <div id="movements-list" style="max-height:260px; overflow:auto; color:#fff; font-size:0.9em;"></div>
+                </div>
+
+            </aside>
+        </main>
+
+        <!-- Modal contraseña para borrado -->
+        <div id="pw-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3 data-i18n="admin_access_title">Acceso administrador</h3>
+                <div id="pw-setup-instructions" style="margin-bottom:8px;color:#333" data-i18n="msg_pw_instructions">Introduce la contraseña de administrador para confirmar la acción. Si no existe, se te pedirá crearla.</div>
+                <label>Contraseña:<br>
+                    <input type="password" id="admin-pw-input">
+                </label>
+                <div style="margin-top:12px; text-align:right;">
+                    <button onclick="confirmProtectedDelete()">Confirmar</button>
+                    <button onclick="closePwModal()">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal para AÑADIR filtro (sumar al stock) -->
+        <div id="add-filtro-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3 data-i18n="add_filter_title">Añadir filtro al inventario</h3>
+                <form id="add-filtro-form">
+                    <label data-i18n="label_tipo">Tipo de filtro:<br>
+                        <select id="add-tipo-filtro">
+                            <option value="aceite">Filtro aceite</option>
+                            <option value="aire">Filtro aire</option>
+                            <option value="habitaculo">Filtro habitáculo</option>
+                            <option value="combustible">Filtro combustible</option>
+                        </select>
+                    </label><br>
+                    <label>Referencia:<br>
+                        <input type="text" id="add-referencia" required>
+                    </label><br>
+                    <label>Cantidad:<br>
+                        <input type="number" id="add-cantidad" value="1" min="1" required>
+                    </label><br>
+                    <label>Observaciones:<br>
+                        <textarea id="add-observaciones" rows="2"></textarea>
+                    </label>
+                    <div class="modal-actions">
+                        <button type="button" onclick="submitAddFilterForm()" data-i18n="btn_añadir">Añadir</button>
+                        <button type="button" onclick="closeAddFilterForm()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- Modal Editor de Grupos de Materiales (admin) -->
+        <div id="material-groups-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3 data-i18n="groups_editor_title">Editor de grupos de materiales</h3>
+                <p data-i18n="groups_editor_help">Modifica la estructura JSON de grupos. Guarda para aplicar.</p>
+                <textarea id="material-groups-json" rows="12" style="width:100%; font-family:monospace;"></textarea>
+                <div style="text-align:right; margin-top:8px;">
+                    <button onclick="saveMaterialGroups()" data-i18n="groups_editor_save">Guardar</button>
+                    <button onclick="closeMaterialGroupsEditor()" data-i18n="groups_editor_cancel">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Login -->
+        <div id="login-modal" class="modal" style="display:none;">
+            <div class="modal-content">
+                <h3 data-i18n="login_title">Iniciar sesión</h3>
+                <label data-i18n="label_user">Usuario:<br><input type="text" id="login-user"></label><br>
+                <label data-i18n="label_pass">Contraseña:<br><input type="password" id="login-pass"></label>
+                <div style="margin-top:10px; text-align:right;">
+                    <button onclick="doLogin()" data-i18n="btn_login_action">Entrar</button>
+                    <button onclick="closeLoginModal()" data-i18n="btn_cancelar">Cancelar</button>
+                </div>
+                <div style="margin-top:10px; font-size:0.9em; color:#333" data-i18n="login_help">Si no existe usuario administrador, el primer usuario que se registre será administrador.</div>
+            </div>
         </div>
     </div>
 
