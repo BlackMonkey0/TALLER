@@ -9,19 +9,34 @@
 </head>
 <body>
     <div class="container">
-        <h1 id="titulo">Códigos de Filtros</h1>
+    <h1 id="titulo" data-i18n="tabla_titulo">Códigos de Filtros</h1>
+        <div style="text-align:center; margin:12px 0;">
+            <input id="codes-search" type="search" placeholder="Buscar código o descripción..." style="width:80%; padding:8px;" />
+        </div>
         <table>
             <thead>
                 <tr>
-                    <th>Código</th>
-                    <th>Descripción</th>
+                    <th data-i18n="th_codigo">Código</th>
+                    <th data-i18n="th_descripcion">Descripción</th>
                 </tr>
             </thead>
             <tbody id="tabla-codigos">
                 <!-- Aquí se insertarán los datos con JS -->
             </tbody>
         </table>
-        <a href="filtros.html"><button>Volver</button></a>
+        <!-- Área para pegar referencias y ordenarlas por modelo -->
+        <div id="refs-input-container" style="margin-top:20px; text-align:center;">
+            <h3 data-i18n="refs_title">Referencias por modelo</h3>
+            <p data-i18n="refs_instructions">Pega aquí tus referencias en el formato: <code>Modelo|Referencia|Descripción opcional</code>, una por línea.</p>
+            <textarea id="refs-input" rows="6" style="width:100%; max-width:800px;">ModeloA|REF123|Filtro aceite premium
+ModeloB|REF456|Filtro aceite estándar
+ModeloA|REF789|Otro</textarea>
+            <div style="margin-top:8px;">
+                <button id="btn-parse-refs" data-i18n="btn_parse_refs">Ordenar y guardar</button>
+                <button id="btn-clear-refs" data-i18n="btn_clear_refs">Eliminar referencias guardadas</button>
+            </div>
+        </div>
+    <a href="filtros.html"><button data-i18n="btn_volver">Volver</button></a>
     </div>
 </body>
 </html>
